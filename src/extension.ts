@@ -1,27 +1,7 @@
 'use strict';
 import * as vscode from 'vscode';
 
-const IDENTIFIER = "emacsMarkMode";
-
-//TODO commands:
-//markMode
-//exitMarkMode
-//cursorHome
-//cursorEnd
-//cursorLeft
-//cursorRight
-//cursorUp
-//cursorDown
-//cursorWordLeft
-//cursorWordRight
-//cursorNextParagraph
-//cursorPrevParagraph
-//cursorBeginOfFile
-//cursorEndOfFile
-//copy
-//cut
-//paste
-//killLineAfterCursor
+const IDENTIFIER = "emacsCandies";
 
 function runCommands(...commands: (string | number)[]): Promise<{}> {
     let p = Promise.resolve({});
@@ -66,7 +46,8 @@ function killToEndOfLine() {
     if (noCharAfterCursor) {
         vscode.commands.executeCommand("deleteRight");
     } else {
-        let { start, end } = lineText.range;
+        let { end } = lineText.range;
+        let start = editor.selection.active;
         editor.selection = new vscode.Selection(start, end);
         // console.log(editor.selection.start.character, editor.selection.end.character);
         // console.log(editor.document.getText(new vscode.Range(start, end)));
